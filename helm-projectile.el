@@ -282,10 +282,10 @@ have a nice display in Helm."
          (helm-list (cl-pairlis full-display proj-dir)))
     helm-list))
 
-(define-key helm-etags-map (kbd "C-c p f")
-  (lambda ()
-    (interactive)
-    (helm-run-after-exit 'helm-projectile-find-file nil)))
+;; (define-key helm-etags-map (kbd "C-c p f")
+;;   (lambda ()
+;;     (interactive)
+;;     (helm-run-after-exit 'helm-projectile-find-file nil)))
 
 (defun helm-projectile-file-persistent-action (candidate)
   "Persistent action for file-related functionality.
@@ -463,21 +463,21 @@ CANDIDATE is the selected file.  Used when no file is explicitly marked."
 (advice-add 'helm-find-file-or-marked
             :after #'helm-projectile-run-projectile-hooks-after-find-file)
 
-(defvar helm-projectile-find-file-map
-  (let ((map (copy-keymap helm-find-files-map)))
-    (helm-projectile-define-key map
-      (kbd "C-c f") #'helm-projectile-dired-files-new-action
-      (kbd "C-c a") #'helm-projectile-dired-files-add-action
-      (kbd "M-e") #'helm-projectile-switch-to-shell
-      (kbd "M-.") #'helm-projectile-ff-etags-select-action
-      (kbd "M-!") #'helm-projectile-find-files-eshell-command-on-file-action)
-    (define-key map (kbd "<left>") #'helm-previous-source)
-    (define-key map (kbd "<right>") #'helm-next-source)
-    (dolist (cmd '(helm-find-files-up-one-level
-                   helm-find-files-down-last-level))
-      (substitute-key-definition cmd nil map))
-    map)
-  "Mapping for file commands in Helm Projectile.")
+;; (defvar helm-projectile-find-file-map
+;;   (let ((map (copy-keymap helm-find-files-map)))
+;;     (helm-projectile-define-key map
+;;       (kbd "C-c f") #'helm-projectile-dired-files-new-action
+;;       (kbd "C-c a") #'helm-projectile-dired-files-add-action
+;;       (kbd "M-e") #'helm-projectile-switch-to-shell
+;;       (kbd "M-.") #'helm-projectile-ff-etags-select-action
+;;       (kbd "M-!") #'helm-projectile-find-files-eshell-command-on-file-action)
+;;     (define-key map (kbd "<left>") #'helm-previous-source)
+;;     (define-key map (kbd "<right>") #'helm-next-source)
+;;     (dolist (cmd '(helm-find-files-up-one-level
+;;                    helm-find-files-down-last-level))
+;;       (substitute-key-definition cmd nil map))
+;;     map)
+;;   "Mapping for file commands in Helm Projectile.")
 
 (defvar helm-projectile-file-actions
   (helm-projectile-hack-actions
